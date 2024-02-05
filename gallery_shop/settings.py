@@ -62,12 +62,11 @@ WSGI_APPLICATION = 'gallery_shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+try:
+    from .local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Database configuration not found in local_settings.py module!")
+    exit(0)
 
 
 # Password validation
